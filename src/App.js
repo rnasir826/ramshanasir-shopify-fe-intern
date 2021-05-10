@@ -16,7 +16,7 @@ function App() {
     const [nominations, setNominations] = useState([])
 
     const sendQuery = async query => {
-      let data = await axios.get(`http://www.omdbapi.com/?apikey=${process.env.REACT_APP_TOKEN}&s=${query}`)
+      let data = await axios.get(`http://www.omdbapi.com/?apikey=a64527c9&s=${query}`)
         setResultData(data.data.Search)
     };
 
@@ -53,7 +53,7 @@ function App() {
     }
 
     // Logic Handles
-    const isButtonDisabled = (item) => {
+    const isBtnDisabled = (item) => {
         return nominations && (nominations.includes(item) || nominations.length >= 5)
     }
 
@@ -65,7 +65,7 @@ function App() {
   return (
     <div className="app-body">
       <div className="sub-body">
-      <h1 className="header-main" >The Shoppies</h1>
+      <h1 className="header-main" >Movie Lookup!</h1>
       
       {/* TODO: MAKE COMPONENT */}
       <div className="input-body">
@@ -98,7 +98,7 @@ function App() {
                   key={index}
                   index={index}
                   item={item}  
-                  isButtonDisabled={isButtonDisabled}
+                  isBtnDisabled={isBtnDisabled}
                   addtoNominations={addtoNominations}
                 />
               </li>
@@ -117,7 +117,7 @@ function App() {
         {
           !nominations ? 
           <div>
-            No Data to show
+            Nominations not found
           </div> :
           nominations.map((item, index) => {
             return (
@@ -126,7 +126,7 @@ function App() {
                   key={index}
                   index={index}
                   item={item}  
-                  isButtonDisabled={isButtonDisabled}
+                  isBtnDisabled={isBtnDisabled}
                   removeFromNomination={removeFromNomination}
                 />
               </li>
@@ -136,7 +136,7 @@ function App() {
         {
           (nominations!==null && nominations.length > 4) ?         
             <div>
-              <h1>Can't add anymore stuff</h1>
+              <h1>Can't add anymore movies</h1>
               <h1>Nomination limit = 5 per user</h1>
             </div> 
         : null
